@@ -1,0 +1,13 @@
+<a href="/">
+    <h1>LOGO</h1>
+</a>
+
+{% if user.is_authenticated %}
+    <p>Hoş geldiniz, {{ user.username }} - Departman: {{ user.usercred.department}}</p>
+    <a href="{% url 'logoutUser' %}">Çıkış Yap</a>
+{% else %}
+    <a href="{% url 'login_page' %}">Giriş Yap</a>
+{% endif %}
+
+
+<hr>

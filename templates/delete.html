@@ -1,0 +1,12 @@
+{% extends 'main.html'%}
+
+{% block content %}
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <p> "{{obj.plane_type}}" Uçağı "{{obj.part_name}}" parçasını silmek istediğinden emin misin? </p>
+    <a href="{{request.META.HTTP_REFERER}}"> Geri Dön </a>
+    <input type="submit" value="Onayla"/>
+</form>
+
+{% endblock %}

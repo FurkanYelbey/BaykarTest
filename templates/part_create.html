@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Parça Ekle</title>
+</head>
+
+<body>
+    {% extends 'main.html' %}
+
+    {% block content %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>Yeni Parça Ekle</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="part_name">Parça Adı:</label>
+        <select class="form-control-sm" name="part_name" id="part_name">
+            {% for part in part_names %}
+                <option value="{{ part.0 }}">{{ part.1 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="plane_type">Uçak Tipi:</label>
+        <select name="plane_type" id="plane_type">
+            {% for plane in plane_types %}
+                <option value="{{ plane.0 }}">{{ plane.1 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <input type="hidden" name="department" value="{{ user_department }}">
+
+        <label for="quantity">Miktar:</label>
+        <input class="form-control-sm" type="number" name="quantity" id="quantity" min="1">
+        <br>
+
+        <button class="btn btn-primary" type="submit">Ekle</button>
+    </form>
+
+    <a href="{% url 'part_list' %}">Geri</a>
+    {% endblock %}
+</body>
+</html>

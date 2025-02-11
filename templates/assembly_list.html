@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaj Listesi</title>
+</head>
+<body>
+    {% extends 'main.html' %}
+
+    {% block content %}
+
+    <h1>Montajlar</h1>
+    <table>
+        <tbody>
+            {% for detail in assembly_details %}
+            <h3>{{ detail.assembly.plane_type }} - {{ detail.assembly.assembly_date }}</h3>
+            <ul>
+                <li>Kanat: {{ detail.part_count.KANAT_TAKIMI }} adet</li>
+                <li>Gövde: {{ detail.part_count.GOVDE_TAKIMI }} adet</li>
+                <li>Kuyruk: {{ detail.part_count.KUYRUK_TAKIMI }} adet</li>
+                <li>Aviyonik: {{ detail.part_count.AVIYONIK_TAKIMI }} adet</li>
+            </ul>
+            {% empty %}
+                <p>Henüz montaj yapılmamış.</p>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+</html>

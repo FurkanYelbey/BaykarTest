@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parça Listesi</title>
+</head>
+<body>
+    {% extends 'main.html' %}
+
+    {% block content %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="message {{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>Parçalar</h1>
+    <a href="{% url 'part_create' %}">Yeni Parça Ekle</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Parça Adı</th>
+                <th>Uçak Tipi</th>
+                <th>Departman</th>
+                <th>Miktar</th>
+                <th>Oluşturulma Tarihi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for part in parts %}
+            <tr>
+                <td>{{ part.part_name }}</td>
+                <td>{{ part.plane_type }}</td>
+                <td>{{ part.department }}</td>
+                <td>{{ part.quantity }}</td>
+                <td>{{ part.created_at|date:"d/m/Y H:i" }}</td>
+                <td><a href= "{% url 'delete_part' part.id %}">Geri Dönüşüm</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Hiç parça bulunmamaktadır.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+</html>

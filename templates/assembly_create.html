@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaj Oluştur</title>
+</head>
+<body>
+    {% extends 'main.html' %}
+
+    {% block content %}
+
+    <h1>Montaj Oluştur</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <form method="POST">
+        {% csrf_token %}
+        <label for="plane_type">Uçak Tipi:</label>
+        <select name="plane_type" id="plane_type">
+            {% for plane in plane_types %}
+                <option value="{{ plane.0 }}">{{ plane.1 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <button type="submit">Montajı Başlat</button>
+    </form>
+
+    <a href="{% url 'assembly_list' %}">Montaj Listesi</a>
+    {% endblock %}
+</body>
+</html>
